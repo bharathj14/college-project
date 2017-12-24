@@ -1,0 +1,138 @@
+body{
+	font-family:arial,sans-serif;	
+}
+#nav{
+	width:100%;
+	height:900px;
+	//background: url('../image/raspberry.png');
+	background-color:#000000;
+	background-size: cover;
+	
+}
+#nav_wrapper{
+	height:70px;
+	width:100%;
+	background:#377D7A;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:auto;
+	opacity:0.7;
+	filter:alpha(opacity=70);
+}
+
+#nav_wrapper ul li{
+	list-style:none;
+	display:inline;
+	font-weight:bold;
+	font-size:25px;
+	padding:10px;
+	margin-top:100px;
+	
+}
+#nav_wrapper a{
+color:white;
+text-decoration:none;
+padding:30px;
+}
+#nav_wrapper ul li:hover{
+	background:blue;
+	transition:all 0.45s;
+	opacity:0.5;
+	filter:alpha(opacity=50);
+}
+.gauge1 {
+	width:200px;
+	height:200px;
+	margin:1em;
+}
+#box {
+	width:250px;
+	height:200px;
+	margin:2em;
+	background-color:#424242;
+	position:relative;
+	float:left;
+}
+#box1 {
+	width:250px;
+	height:200px;
+	margin:2em;
+	background-color:#424242;
+	position:relative;
+	float:left;	
+}
+#box2 {
+	width:250px;
+	height:200px;
+	margin:2em;
+	background-color:#424242;
+	position:relative;
+	float:left;	
+}
+#box3 {
+	width:250px;
+	height:200px;
+	margin:2em;
+	background-color:#424242;
+	position:relative;
+	float:left;	
+}
+#box8 {
+	width:250px;
+	height:200px;
+	margin:2em;
+	background-color:#424242;
+	position:relative;
+	left:100px;
+	top:305px;	
+}
+#box4 {
+	width:250px;
+	height:200px;
+	margin:2em;
+	background-color:#424242;
+	position:absolute;
+	left:30px;
+	top:320px;	
+}
+#box5 {
+	width:450px;
+	height:100px;
+	margin:2em;
+	background-color:#424242;
+	position:absolute;
+	left:300px;
+	top:320px;	
+}
+#box6 {
+	width:250px;
+	height:200px;
+	margin:2em;
+	background-color:#424242;
+	position:relative;
+	float:left;
+	}
+#box7 {
+	width:320px;
+	height:180px;
+	margin:2em;
+	background-color:#424242;
+	position:relative;
+	float:left;
+	}
+#mon1 {
+	width:220px;
+	height:400px;
+	margin:2em;
+	background-color:white;
+	position:relative;
+	float:left;
+}
+#mon2 {
+	width:400px;
+	height:360px;
+	margin:2em;
+	background-color:gray;
+	position:relative;
+	float:left;
+}

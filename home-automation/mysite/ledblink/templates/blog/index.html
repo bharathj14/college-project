@@ -1,0 +1,91 @@
+<html>
+<head>
+{% load static %}
+<link rel="stylesheet" type="text/css" href= "{% static 'css/style.css' %}" />
+<script type="text/javascript" src="{% static 'javascript/raphael.js' %}"></script>
+<script type="text/javascript" src="{% static 'javascript/justgage.js' %}"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+window.onload=function(){
+	var gauge=new JustGage({
+	id: "gauge",
+	value:{{temperature}} ,
+	min: 0,
+	max: 100,
+	title: "Temperature"
+});
+	var g1=new JustGage({
+	id: "g1",
+	value: {{humidity}},
+	min: 0,
+	max: 100,
+	title: "Humidity"
+});
+	var g2=new JustGage({
+	id: "g2",
+	value: 23 ,
+	min: 0,
+	max: 100,
+	title: "Water Temperature"
+});
+        var g3=new JustGage({
+	id: "g3",
+	value: 8 ,
+	min: 1,
+	max: 16,
+	title: "pH value"
+});
+}
+</script>
+<style>
+body {background-color: powderblue !important;}
+</style>
+</head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<body >
+<!--<meta http-equiv="refresh" content="5">-->
+<div id="nav"></br>
+			<h1 style="color:9b3c3c"><center> AUTOMATED HOME SECURITY</center></h1>
+			<li style="margin-left:1120px"><font size="4"><font color="green">username:</font>{{user.username}}</font></li>
+			<li style="margin-left:1200px"><a href="/logout"><font size="4" color="red">Logout</font></a></li>
+		</ul>
+	<div id="box6">
+				<div id="gauge" class="gauge1">
+				</div>
+		</div>	
+		<div id="box6">
+				<div id="g1" class="gauge1">
+				</div>
+		</div>
+		<div id="box6">
+			<form action="" method="post">{%csrf_token%}
+				<center><h1><font style="color:white">LIGHT<br/>{{res2}}</font></h1><br/></center>
+				<center><input type="submit" class="btn btn-info" name="light-on" value="ON">
+				<input type="submit" class="btn btn-info" name="light-off" value="OFF"></center>
+			</form>
+		</div>
+		<div id="box6">
+			<form action="" method="post">{%csrf_token%}
+				<center><h1><font style="color:white">GARAGE DOOR<br/>{{res1}}</font></h1><br/></center>
+				<center><input type="submit" class="btn btn-info" name="door-open" value="OPEN">
+				<input type="submit" class="btn btn-info" name="door-close" value="CLOSE"></center>
+			</form>
+		</div>
+<div id="box6">
+			<form action="" method="post">{%csrf_token%}
+				<center><h1><font style="color:white">FAN<br/>{{res3}}</font></h1><br/></center>
+				<center><input type="submit" class="btn btn-info" name="fan-on" value="ON">
+				<input type="submit" class="btn btn-info" name="fan-off" value="OFF"></center>
+			</form>
+		</div>
+<div id="box6">
+			<form action="" method="post">{%csrf_token%}
+				<center><h1><font style="color:white">System<br/>{{res4}}</font></h1><br/></center>
+				<center><input type="submit" class="btn btn-info" name="pc-on" value="ON">
+				<input type="submit" class="btn btn-info" name="pc-off" value="OFF"></center>
+			</form>
+		</div>
+</body>
+</html>

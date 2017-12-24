@@ -1,0 +1,126 @@
+<html>
+<head>
+{% load static %}
+<link rel="stylesheet" type="text/css" href= "{% static 'css/style.css' %}" />
+<script type="text/javascript" src="{% static 'javascript/raphael.js' %}"></script>
+<script type="text/javascript" src="{% static 'javascript/justgage.js' %}"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>#canvas{background: #ffffff;
+        box-shadow:5px 5px 5px #ccc;
+		border:5px solid #eee;
+		margin-bottom:10px;}</style>	
+<script type="text/javascript">
+
+var canvas ;
+var context ;
+var Val_Max;
+var Val_Min;
+var sections;
+var xScale;
+var yScale;
+var y;
+		// values of each item on the graph
+//var itemName = [ "USA", "China", "India", "Japan" , "Germany"];
+//var itemValue = [ 14, 7, 4.2, 4, 3.5 ];
+var itemName = []
+var itemValue = []
+{% for i in data %}
+		
+		itemValue.push("{{ i.temp }}");
+		itemName.push("{{ i.date_time }}");
+{% endfor %}
+
+function init() {
+		// intialize values for each variables
+	sections = 5;
+	Val_Max = 30;
+	Val_Min=15;
+	var stepSize = 2;
+	var columnSize = 50;
+	var rowSize = 60;
+	var margin = 10;
+	var header = "Temperature" 
+		//
+		
+	canvas = document.getElementById("canvas");
+	context = canvas.getContext("2d");
+	context.fillStyle = "#000;"
+	
+	yScale = (canvas.height - columnSize - margin) / (Val_Max);
+	xScale = (canvas.width - rowSize) / (sections + 1);
+	
+	//context.strokeStyle="#000;"; // background black lines
+	context.beginPath();
+		// column names 
+	//context.font = "19 pt Arial;"
+	context.fillText(header, 0,columnSize - margin);
+		// draw lines in the background
+	//context.font = "16 pt Helvetica"
+	var count =  0;
+	for (scale=Val_Max;scale>=0;scale = scale - stepSize) {
+		y = columnSize + (yScale * count * stepSize); 
+		context.fillText(scale, margin,y + margin);
+		context.moveTo(rowSize,y)
+		context.lineTo(canvas.width,y)
+		count++;
+	}
+	context.stroke();
+	
+		// print names of each data entry
+	context.font = "20 pt Verdana";
+	context.textBaseline="bottom";
+	for (i=0;i<5;i++) {
+		computeHeight(itemValue[i]);
+		context.fillText(itemName[i], xScale * (i+1),y - margin);
+	}
+	
+		// shadow for graph's bar lines with color and offset
+  
+	context.fillStyle="#db111b";
+  //context.shadowColor = 'rgba(128,128,128, 0.5)';
+  
+  //shadow offset along X and Y direction 
+	//context.shadowOffsetX = 9;
+	//context.shadowOffsetY = 3;
+  
+		// translate to bottom of graph  inorder to match the data 
+  context.translate(0,canvas.height - margin);
+	context.scale(xScale,-1 * yScale);
+  
+		// draw each graph bars	
+	for (i=0;i<5;i++) {
+		context.fillRect(i+1, 0, 0.3, itemValue[i]);
+	}
+}
+
+function computeHeight(value) {
+	y = canvas.height - value * yScale ;	
+}
+
+</script>
+</head>
+<body onLoad="init()">
+<meta http-equiv="refresh" content=".5">
+<div id="nav"></br>
+	<div id="nav_wrapper"><br/>
+		<ul>
+			<li><a href="{% url 'ledblink:home' %}">Home</a></li>
+			<li><a href="{% url 'ledblink:monitor' %}">Monitoring</a></li>
+			<li><a href="{% url 'ledblink:control' %}">Controlling</a></li>
+			<li><a href="{% url 'ledblink:planth_health' %}">Plant Health </a></li>
+			<li></li>
+			<li><a href="#"></a></li>
+			<li style="margin-right:100px"><a href="/logout"><font size="4">{{user.username}} Logout</font></a></li>
+
+		</ul>
+	<div>
+		<canvas id="canvas" height="300" width="550">
+		</canvas>
+	</div>
+
+	</div>
+</div>
+</body>
+</html>
